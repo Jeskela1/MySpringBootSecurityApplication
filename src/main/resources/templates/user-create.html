@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add a new user</title>
+</head>
+<body>
+
+<form  th:action="@{/users/addUser}" th:object="${user}" th:method="POST" >
+    <label for="username">Name</label>
+    <input type="text" th:field="*{username}" id="username" required>
+    <div style="color:red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Error</div>
+    <br>
+    <label for="password">Password</label>
+    <input type="text" th:field="*{password}" id="password" required>
+    <div style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Error</div>
+    <br>
+    <label for="email">Email</label>
+    <input type="text" th:field="*{email}" id="email" required>
+    <div style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Error</div>
+    <br>
+    <select th:name="roles" th:value="*{roles}">
+        <option th:each="role:${roles}" th:value="${role.id}" th:text="${role.name}" selected/>
+    </select>
+    <button type="submit">Add User</button>
+
+</form>
+<a href="/users">Back to the list</a>
+<br>
+<a href="/logout">Logout</a>
+</body>
+</html>
